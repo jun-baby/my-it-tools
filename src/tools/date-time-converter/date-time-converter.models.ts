@@ -12,6 +12,7 @@ export {
   dateToExcelFormat,
   excelFormatToDate,
   isExcelFormat,
+  isMyDate,
 };
 
 const ISO8601_REGEX
@@ -26,6 +27,8 @@ const RFC7231_REGEX = /^[A-Za-z]{3},\s[0-9]{2}\s[A-Za-z]{3}\s[0-9]{4}\s[0-9]{2}:
 
 const EXCEL_FORMAT_REGEX = /^-?\d+(\.\d+)?$/;
 
+const MY_FORMAT_REGEX = /^([0-9]{4})年([0-9]{2})月([0-9]{2})日 ?([0-9]{2}):([0-9]{2}):([0-9]{2})$/;
+
 function createRegexMatcher(regex: RegExp) {
   return (date?: string) => !_.isNil(date) && regex.test(date);
 }
@@ -37,6 +40,7 @@ const isRFC7231DateString = createRegexMatcher(RFC7231_REGEX);
 const isUnixTimestamp = createRegexMatcher(/^[0-9]{1,10}$/);
 const isTimestamp = createRegexMatcher(/^[0-9]{1,13}$/);
 const isMongoObjectId = createRegexMatcher(/^[0-9a-fA-F]{24}$/);
+const isMyDate = createRegexMatcher(MY_FORMAT_REGEX);
 
 const isExcelFormat = createRegexMatcher(EXCEL_FORMAT_REGEX);
 
